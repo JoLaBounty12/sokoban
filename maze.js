@@ -36,6 +36,59 @@ const crates = [];
 
 // Helper function for creating a div representing a box/crate,
 // and positioning it at a specified row/column in the grid.
+let storage =[];
+
+
+
+for (let row=0; row<map.length; row++) {
+    const rowStr = map[row];
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "row";
+
+    let cratesRow = [];
+
+    
+
+    for (let i = 0; i <rowStr.length; i++){
+        let cellClass = rowStr[i];
+        const cellDiv = document.createElement("div");
+        let newCrate = "";
+
+        cellDiv.className = "cell " + cellClass;
+
+        if (cellClass === "S"){
+            avatarCol = i;
+            avatarRow = row;
+
+
+        }
+        if(cellClass ===  "O"){
+            
+        }
+        if(cellClass === "B") {
+            newCrate = crate(row, i)
+        
+        }
+        
+
+
+        if(cellDiv === "X"){
+        
+         cellDiv.className = "cell " + "O"
+         newCrate = crate(row, i);
+
+        }
+        rowDiv.appendChild(cellDiv);
+
+       cratesRow.push (newCrate);
+
+    }
+    mazeDiv.appendChild(rowDiv);
+
+    crates.push (cratesRow);
+
+}
+
 function crate(row, col) {
     const newCrate = document.createElement("div");
 
@@ -83,16 +136,29 @@ function move(dRow, dCol) {
         const crateDestRow = destRow + dRow;
         const crateDestCol = destCol + dCol;
 
+       if(map[crateDestRow][crateDestCol] !== "W" &&  crates[crateDestRow][crateDestCol]==""){
+
+       
+
+    
+
         // Push the crate.
         crates[crateDestRow][crateDestCol] = crate;
-        crates[destRow][destCol] = null;
+        crates[destRow][destCol] = "";
         crate.style.top = crateDestRow * delta + "px";
         crate.style.left = crateDestCol * delta + "px";
+
+       
+
+    }
+        
 
     }
 
     // If there's no wall in the way, move the player's avatar.
-    if(destCell && destCell !== "W") {
+    if (destCell !== "W" && crates[destRow][destCol] == "") {
+
+   
         avatarRow += dRow;
         avatarCol += dCol;
         redrawAvatar();
