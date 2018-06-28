@@ -10,7 +10,8 @@ body {
     position: absolute; 
     width: 33px; 
     height: 33px; 
-    background: url('chok.png'); 
+    background: url('bigfish.png'); 
+    background-repeat: no-repeat;
     background-size: contain; 
     transition: all 0.1s;
 }
@@ -58,7 +59,9 @@ body {
     width: 31px; 
     height: 31px; 
     margin: 1px; 
-    background: url('applecrate.png'); 
+    background: url('fish.png'); 
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: contain; 
     transition: all 0.1s;
     
